@@ -1,0 +1,10 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace CloudCommTCSSeleniumC_.Utilities
+{
+    internal class ConfigReader
+    {
+    }
+}
