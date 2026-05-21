@@ -1,0 +1,104 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using WebDriverManager.DriverConfigs.Impl;
+
+namespace CloudCommTCS.SeleniumTests
+{
+    public class Testcase1
+    {
+
+        // driver instance at class level
+        IWebDriver driver;
+
+        [SetUp]
+        public void startbrowser()
+        {
+
+            // configure the web driver manager to set up the chrome capabilities 
+            new WebDriverManager.DriverManager().SetUpDriver(new ChromeConfig());
+
+            // intialize the web driver 
+            driver = new ChromeDriver();
+        }
+
+        [Test]
+        public void locators()
+        {
+
+            driver.Navigate().GoToUrl("https://www.makemytrip.com/");
+
+            // id- unique in nature 
+            // fast locator 
+            // if id is present use it blindly 
+
+
+            IWebElement username = driver.FindElement(By.Id(""));
+            username.SendKeys("admin");
+
+
+            // name 
+
+            IWebElement password = driver.FindElement(By.Name("userrname"));
+            password.SendKeys("admin");
+
+            // classname 
+
+            // link text  - text present on the links only. THis will not work for input and span elements
+
+
+            IWebElement text = driver.FindElement(By.LinkText("Login"));
+            password.SendKeys("admin");
+
+            // partial link text - text present on the links only. THis will not work for input and span elements
+
+            IWebElement text1 = driver.FindElement(By.PartialLinkText("Log"));
+            text1.SendKeys("admin");
+
+
+            // css selector - css styling 
+
+            // id = username - css sel = #username - this will become the css selector 
+
+            IWebElement text4 = driver.FindElement(By.CssSelector("button[type = 'submit']"));
+            text4.SendKeys("admin");
+
+
+            // xpath - absolute  - on the path of the html - traversing from the route of the web page  /html
+
+            // /html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/form[1]/div[1]/div[1]/div[2]/input[1]
+
+            IWebElement text2 = driver.FindElement(By.XPath("/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2]/form[1]/div[1]/div[1]/div[2]/input[1]"));
+            text2.SendKeys("admin");
+
+            // xpath - relative  to an element - starts with // 
+
+
+            IWebElement text3 = driver.FindElement(By.XPath("//button[@type = 'submit']"));
+            text3.SendKeys("admin");
+
+            // tag name is the first text present in the element -  are taken for group of similar elements - input - text box , div , span 
+
+            IWebElement login = driver.FindElement(By.TagName("input"));
+            login.SendKeys("admin");
+
+            // indexing 
+
+            IWebElement text6 = driver.FindElement(By.XPath("(//i[@class = 'oxd-icon bi-check oxd-checkbox-input-icon'])[7]"));
+            text6.SendKeys("admin");
+
+        }
+
+        [TearDown]
+        public void closebrowser()
+        {
+
+            // it will close the current browser session
+            driver.Close();
+
+        }
+
+    }
+}
