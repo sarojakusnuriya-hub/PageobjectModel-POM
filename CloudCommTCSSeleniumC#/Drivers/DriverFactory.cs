@@ -23,6 +23,9 @@ namespace CloudCommTCSSeleniumC_.Drivers
                 new ChromeOptions();
 
             options.AddArgument("--start-maximized");
+            options.AddArgument("--headless=new");
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-dev-shm-usage");
 
             driver.Value =
                 new ChromeDriver(options);
