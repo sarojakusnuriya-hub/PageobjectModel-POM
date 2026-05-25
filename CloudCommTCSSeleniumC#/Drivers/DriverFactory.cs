@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,18 +18,19 @@ namespace CloudCommTCSSeleniumC_.Drivers
         public static void InitDriver()
         {
             new DriverManager()
-                .SetUpDriver(new ChromeConfig());
-
-            ChromeOptions options =
-                new ChromeOptions();
-
+                .SetUpDriver(new FirefoxConfig());
+ 
+           FirefoxOptions options = new FirefoxOptions();
+ 
+            options.AddArgument("--start-maximized");
+ 
             options.AddArgument("--start-maximized");
             options.AddArgument("--headless=new");
             options.AddArgument("--no-sandbox");
             options.AddArgument("--disable-dev-shm-usage");
 
             driver.Value =
-                new ChromeDriver(options);
+                new FirefoxDriver(options);
         }
 
         public static IWebDriver GetDriver()
